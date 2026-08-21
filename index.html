@@ -34,463 +34,639 @@
 
   <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+  <!-- Fonts: Lato (body/headings) + Roboto (utility), matching the reference site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---- Two-column layout: narrow column on the LEFT, main content on the RIGHT ---- */
+    * { box-sizing: border-box; }
+
+    /* ---- Typography, matched to the reference site ---- */
+    body {
+      font-family: "Lato", sans-serif;
+      font-weight: 300;
+      color: #626262;
+      font-size: 16px;
+      line-height: 23px;
+    }
+
+    .site-shell a {
+      color: #4caac9;
+      text-decoration: none;
+    }
+
+    .site-shell a:hover {
+      text-decoration: underline;
+    }
+
+    .main-col h2,
+    .sidebar .sb-block-title {
+      font-family: "Lato", sans-serif;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0px;
+      color: #2a2a2a;
+    }
+
+    .main-col h2 {
+      font-size: 32px;
+      line-height: 36px;
+      margin-top: 8px;
+    }
+
+    .sidebar .sb-block-title {
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .site-shell p {
+      font-family: "Lato", sans-serif;
+      font-weight: 300;
+      color: #626262;
+      font-size: 16px;
+      line-height: 23px;
+    }
+
+    .papertitle {
+      font-family: "Lato", sans-serif;
+      font-weight: 700;
+      color: #2a2a2a;
+      font-size: 16px;
+    }
+
+    .sidebar .sb-name {
+      font-family: "Lato", sans-serif;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #2a2a2a;
+    }
+
+    .sidebar .sb-links a,
+    .sidebar .sb-role {
+      font-family: "Lato", sans-serif;
+    }
+
+    .site-shell {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* Top site header, name at the very top of the page like the reference site */
+    .site-header {
+      padding: 22px 20px;
+      text-align: left;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .site-header .site-title {
+      font-family: "Lato", sans-serif;
+      font-weight: 300;
+      font-size: 30px;
+      color: #2a2a2a;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    /* Narrow left column */
+    .sidebar {
+      flex: 0 0 240px;
+      max-width: 240px;
+      position: sticky;
+      top: 24px;
+      text-align: center;
+    }
+
+    .sidebar img.avatar {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .sidebar .sb-role {
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 300;
+      color: #626262;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .sidebar .sb-links {
+      font-size: 14px;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .sidebar .sb-links a {
+      display: block;
+      margin: 4px 0;
+    }
+
+    .sidebar hr.sb-rule {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 18px 0;
+    }
+
+    .sidebar .sb-block-title {
+      margin-bottom: 8px;
+    }
+
+    .sidebar .sb-block p {
+      font-size: 13px;
+      font-weight: 300;
+      color: #626262;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    /* Main (wide) column */
+    .main-col {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .main-col h2 {
+      margin: 0 0 12px;
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+
+    /* project / experience rows inside the main column */
+    .row-card {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+
+    .row-card .thumb {
+      flex: 0 0 140px;
+      width: 140px;
+    }
+
+    .row-card .thumb img,
+    .row-card .thumb video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .row-card .thumb .hoverwrap {
+      position: relative;
+    }
+
+    .row-card .thumb .hoverwrap video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .row-card .body {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    @media (max-width: 780px) {
+      .layout {
+        flex-direction: column;
+      }
+      .sidebar {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+        position: static;
+        text-align: left;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .sidebar img.avatar {
+        max-width: 120px;
+      }
+      .row-card {
+        flex-direction: column;
+      }
+      .row-card .thumb {
+        width: 160px;
+      }
+    }
+  </style>
 </head>
 
   <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:63%;vertical-align:middle">
-                <p class="name" style="text-align: center;">
-                  Ruihan Gao
-                </p>
-               <p>
-I'm an undergraduate student at the University of Washington, currently a research assistant in 
-<a href="https://personalrobotics.cs.washington.edu/">Personal Robotics Lab</a>, 
-advised by Prof. <a href="https://goodrobot.ai/">Siddhartha Srinivasa</a>. 
-Also, I'm honored to work with Prof. <a href="https://yyueluo.com/">Yiyue Luo</a> 
-and PhD student <a href="https://yunchuzhang.github.io/">Yunchu Zhang</a>. 
-My research interests lie in robot design and robot learning.
-</p>
-<p>
-Previously, I was fortunate to work as a research assistant at the <a href="https://air.tsinghua.edu.cn/"> Institute for AI Industry Research</a>, 
-Tsinghua University, advised by Prof. 
-<a href="https://air.tsinghua.edu.cn/en/info/1046/1196.htm">Guyue Zhou</a>.
-<br>
-Also, I was honored to intern as R&D engineer at 
-<a href="https://galaxea-dynamics.com/">Galaxea Dynamics</a>.
-</p>
-                <p style="text-align:center">
-                  <a href="mailto:ruihangao10@gmail.com">Email</a> &nbsp;/&nbsp;
-                  <a href="https://www.linkedin.com/in/ruihan-gao-81b4b9362/">Linkedin</a> &nbsp;/&nbsp;
-					<a href="https://x.com/Ruihan_Gao">X(Twitter)</a> 
-					
-                </p>
-              </td>
-              <td style="padding:2.5%;width:37%;max-width:37%">
-                <a href="images/Ruihan Gao.jpg"><img style="width:80%;max-width:80%;object-fit: cover;" alt="profile photo" src="images/Ruihan Gao.jpg" class="hoverZoomLink"></a>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-              <tr>
-              <td style="padding:8px;width:100%;vertical-align:middle">
- <h1 style="display:none;">Ruihan Gao - Robotics Researcher</h1>
-<h2 style="margin: 0px 0px 0px;">News</h2>
+    <header class="site-header">
+      <div class="site-title">Ruihan Gao</div>
+    </header>
 
-<div class="news-slider">
-  <div class="news-container">
-    <ul id="news-list">
-	  <li><strong>[Sep. 2025]</strong> 🎉🎉 I became a research assistant in Personal Robotics Lab</a>.</li>
-      <li><strong>[May. 2025]</strong> 🎉🎉 I became a R&D intern at Galaxea Dynamics</a>.</li>
-      <li><strong>[Jan. 2025]</strong> 🎉🎉 I joined the Institute for AI Industry Research,Tsinghua University</a></span> for manipulation research.</li>
-    </ul>
-  </div>
+    <div class="site-shell">
+      <div class="layout">
 
-  <div class="slider-container">
-    <div class="slider-track">
-      <div class="slider-thumb" id="slider-thumb"></div>
-    </div>
-  </div>
-</div>
+        <!-- ================= LEFT NARROW COLUMN ================= -->
+        <aside class="sidebar">
+          <a href="images/Ruihan Gao.jpg">
+            <img class="avatar hoverZoomLink" alt="profile photo" src="images/Ruihan Gao.jpg">
+          </a>
 
-<style>
-  .news-slider {
-    position: relative;
-    max-width: 100%;
-    margin: 0 auto;
-    display: flex;
-    gap: 15px;
-  }
+          <div class="sb-role">
+            Undergraduate Researcher<br>
+            University of Washington
+          </div>
 
-  .news-container {
-    flex-grow: 1;
-    overflow: hidden;
-    max-height: 150px;
-    position: relative;
-  }
+          <div class="sb-links">
+            <a href="mailto:ruihangao10@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/ruihan-gao-81b4b9362/">LinkedIn</a>
+            <a href="https://x.com/Ruihan_Gao">X (Twitter)</a>
+          </div>
 
-  #news-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transition: transform 0.2s ease;
-  }
+          <hr class="sb-rule">
 
-  #news-list li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: rgba(240, 240, 240, 0.1);
-    border-radius: 4px;
-  }
+          <div class="sb-block">
+            <div class="sb-block-title">Currently</div>
+            <p>
+              Research assistant, <a href="https://personalrobotics.cs.washington.edu/">Personal Robotics Lab</a>,
+              advised by Prof. <a href="https://goodrobot.ai/">Siddhartha Srinivasa</a>.
+              Also working with Prof. <a href="https://yyueluo.com/">Yiyue Luo</a> and
+              PhD student <a href="https://yunchuzhang.github.io/">Yunchu Zhang</a>.
+            </p>
+          </div>
 
-  .slider-container {
-    width: 20px;
-    min-height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+          <hr class="sb-rule">
 
-  .slider-track {
-    height: 100%;
-    width: 6px;
-    background-color: #e0e0e0;
-    border-radius: 3px;
-    position: relative;
-  }
+          <div class="sb-block">
+            <div class="sb-block-title">Interests</div>
+            <p>Robot design, dexterous manipulation, and robot learning. Also: soccer, basketball, skiing, drums, and traveling.</p>
+          </div>
+        </aside>
 
-  .slider-thumb {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10px;
-    height: 30px;
-    background-color: #9e9e9e;
-    border-radius: 3px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: top 0.1s ease, opacity 0.3s ease;
-    opacity: 1; /* Ensure the thumb is always visible */
-  }
+        <!-- ================= RIGHT MAIN COLUMN ================= -->
+        <main class="main-col">
 
-  .slider-thumb:hover {
-    background-color: #7e7e7e;
-  }
-</style>
-
-<script>
-  window.addEventListener('load', function () {
-    const newsList = document.getElementById('news-list');
-    const newsContainer = document.querySelector('.news-container');
-    const sliderThumb = document.getElementById('slider-thumb');
-    const sliderTrack = document.querySelector('.slider-track');
-
-    const listHeight = newsList.scrollHeight;
-    const containerHeight = newsContainer.clientHeight;
-    const scrollableDistance = Math.max(0, listHeight - containerHeight);
-
-    let currentPosition = 0;
-
-    // Always show the slider thumb, even if the content is short
-    sliderThumb.style.opacity = 1;
-
-    // Function to update the position of the list and the slider thumb
-    function updatePosition(position) {
-      position = Math.max(0, Math.min(position, scrollableDistance));
-      currentPosition = position;
-      newsList.style.transform = `translateY(-${position}px)`;
-
-      const thumbPosition = (position / scrollableDistance) * (sliderTrack.clientHeight - sliderThumb.clientHeight);
-      sliderThumb.style.top = `${thumbPosition}px`;
-    }
-
-    // Allow scrolling interaction even if content is not scrollable
-    function allowScrolling() {
-      if (scrollableDistance === 0) {
-        // Force scroll interaction when content is short
-        newsContainer.style.overflowY = 'scroll'; // Always show scroll bar
-        updatePosition(0); // Ensure the thumb is at the top
-      } else {
-        newsContainer.style.overflowY = 'hidden'; // Hide the scroll bar when content overflows
-      }
-    }
-
-    allowScrolling();
-
-    // Mouse drag support
-    let isDragging = false;
-    sliderThumb.addEventListener('mousedown', function (e) {
-      isDragging = true;
-      e.preventDefault();
-    });
-
-    document.addEventListener('mousemove', function (e) {
-      if (!isDragging) return;
-      const trackRect = sliderTrack.getBoundingClientRect();
-      const thumbHeight = sliderThumb.clientHeight;
-      const relativeY = Math.min(Math.max(e.clientY - trackRect.top, thumbHeight / 2), trackRect.height - thumbHeight / 2);
-      const scrollRatio = (relativeY - thumbHeight / 2) / (trackRect.height - thumbHeight);
-      updatePosition(scrollRatio * scrollableDistance);
-    });
-
-    document.addEventListener('mouseup', function () {
-      isDragging = false;
-    });
-
-    // Track click to jump
-    sliderTrack.addEventListener('click', function (e) {
-      if (e.target === sliderThumb) return;
-      const trackRect = sliderTrack.getBoundingClientRect();
-      const thumbHeight = sliderThumb.clientHeight;
-      const relativeY = Math.min(Math.max(e.clientY - trackRect.top, thumbHeight / 2), trackRect.height - thumbHeight / 2);
-      const scrollRatio = (relativeY - thumbHeight / 2) / (trackRect.height - thumbHeight);
-      updatePosition(scrollRatio * scrollableDistance);
-    });
-
-    // Mouse wheel support
-    newsContainer.addEventListener('wheel', function (e) {
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? 30 : -30;
-      updatePosition(currentPosition + delta);
-    });
-
-    // Touch support
-    sliderThumb.addEventListener('touchstart', e => {
-      isDragging = true;
-      e.preventDefault();
-    });
-
-    document.addEventListener('touchmove', e => {
-      if (!isDragging) return;
-      const trackRect = sliderTrack.getBoundingClientRect();
-      const thumbHeight = sliderThumb.clientHeight;
-      const relativeY = Math.min(Math.max(e.touches[0].clientY - trackRect.top, thumbHeight / 2), trackRect.height - thumbHeight / 2);
-      const scrollRatio = (relativeY - thumbHeight / 2) / (trackRect.height - thumbHeight);
-      updatePosition(scrollRatio * scrollableDistance);
-    });
-
-    document.addEventListener('touchend', function () {
-      isDragging = false;
-    });
-
-    // Initially set the scroll position to 0
-    updatePosition(0);
-  });
-</script>
-
-		      <br><br>
-                <h2>Research</h2>
-                <p>
-                 I am passionate about robot design and robot learning, My goal is to build reliable system to enhance robotic performance. My dream is to become a full-stack roboticist.
-                </p>
-		<p>
-		 Herein I present some of my past projects.
-		</p>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
- <!------------------------------------ UTIL -----------------------------------------
-        
-            <tr bgcolor="#ffffd0">
-             <td style="padding:16px;width:20%;vertical-align:middle">
-                  <img src="images/UTIL.jpg" alt="UTIL" width="160" style="height: auto;" >
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                  
-                  <span class="papertitle">UTIL: Universal Tool-Centric Interface for Long-Horizon and Multi-Tool Manipulation</span>
-                  
-                  <p>
-                      Ruihan Gao*, Yuchen Yang*, Juanhan Jiao, Yuxuan Miao, Yunchu Zhang, Yiyue Luo, Siddhartha Srinivasa
-					  <p>
-						  In Submission
-					  </p> 
-              </td>
-            </tr>
-			  >
-
-   <!------------------------------------ Gripper Tripple ----------------------------------------->
-            
-            
-            <tr bgcolor="#ffffd0">
-              <td style="padding:16px;width:20%;vertical-align:middle">
-                  <img src="images/Gripper3.jpg" alt="Gripper3" width="160" style="height: auto;" >
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                  
-                  <span class="papertitle">Three-Fingered Dexterous Hand Universal Manipulation Interface</span>
-                  
-                  <p>
-                      Zeyu Pang*, Ruihan Gao*, Yujie Cui*, Yang Luo, Yiheyan Zhang, Yan Ke, Guyue Zhou
-					  <p>
-						  Under Review
-					  </p>
-                  </p>    
-                  <a href="data/Gripper3.pdf">portfolio</a> &nbsp;/&nbsp;
-       <a href="data/Gripper3.mp4">demo</a>      
-              </td>
-            </tr>
-
-    <!------------------------------------ robocon  ----------------------------------------->
-            <tr>
-              <td style="padding:16px;width:20%;vertical-align:middle" >
-                  <img src="images/robocon.jpg" alt="robocon" width="160" style="height: auto;" >
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                  
-                  <span class="papertitle">CURC ROBOCON 2024 "Harvest Day"</span>
-                  <p>
-			  Our team has developed a robot capable of picking up seedlings and shooting balls. It achieves precise grasping through a parallel four-finger gripper and enables accurate control of the ball's landing point via the simultaneous action of bidirectional friction wheels.
-		  </p>
-              </td>
-            </tr>
-		  
-<!------------------------------------ Quadrupedal Transformable Tracked Robot----------------------------------------->		  
-            <tr onmouseout="wildlma_stop()" onmouseover="wildlma_start()">
-              <td style="padding:16px;width:20%;vertical-align:middle" >
-                <div class="one">
-                  <div class="two" id='wildlma'><video  width="160"  muted autoplay loop>
-                    Your browser does not support the video tag.
-                    </video></div>
-			 <img src='images/wildlma.jpg' width="160" height="140">
-                </div>
-                <script type="text/javascript">
-                  function wildlma_start() {
-                    document.getElementById('wildlma').style.opacity = "1";
-                  }
-        
-                  function wildlma_stop() {
-                    document.getElementById('wildlma').style.opacity = "0";
-                  }
-                  wildlma_stop()
-                </script>
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                  
-                  <span class="papertitle">Quadrupedal Transformable Tracked Robot</span>
-                  
-                  <p>
-                      The robot adopts a modular design, allowing for adjustments in leg length and track length to suit different usage scenarios. It achieves a combined wheel-leg mechanism through a metamorphic mechanism, featuring variable track angles and an 8-degree-of-freedom joint design.   
-		  </p>
-			  <a href="data/wildlma.pdf">report</a> &nbsp;/&nbsp;
-       <a href="data/wildlma.mp4">demo</a>  
-              </td>
-	    </tr>
-   <!------------------------------------ ASME SMRDC 2024 ----------------------------------------->
-            <tr onmouseout="ASME24_stop()" onmouseover="ASME24_start()">
-              <td style="padding:16px;width:20%;vertical-align:middle" >
-                <div class="one">
-                  <div class="two" id='ASME24'><video  width="160"  muted autoplay loop>
-                    Your browser does not support the video tag.
-                    </video></div>
-			 <img src='images/ASME24.jpg' width="160" height="160">
-                </div>
-                <script type="text/javascript">
-                  function ASME24_start() {
-                    document.getElementById('ASME24').style.opacity = "1";
-                  }
-        
-                  function ASME24_stop() {
-                    document.getElementById('ASME24').style.opacity = "0";
-                  }
-                  ASME24_stop()
-                </script>
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                  
-                  <span class="papertitle">ASME Student Mechanism and Robot Design Competition 2024</span>
-                  
-                  <p>
-                      This project proposed a design transitioning from O-shaped wheels to an ∞-shaped caterpillar track, allowing the robot to carry payloads smoothly on flat surfaces and traverse obstacles on rough terrain.
-                  </p>    
-                    <a href="data/ASME-report.pdf">report</a> &nbsp;/&nbsp;
-        
-       <a href="data/ASME-video.mp4">demo</a>
-        <p></p>   
-              </td>
-	    </tr>
-		  
-<!------------------------------------ Leg-Arm-Coordination-in-Quadrupedal-Robotics ----------------------------------------->
-	
-    <tr onmouseout="robotics_stop()" onmouseover="robotics_start()">
-      <td style="padding:16px;width:20%;vertical-align:middle">
-        <div class="one">
-          <div class="two" id='robotics_image'><video  width=100% muted autoplay loop>
-          <source src="images/robotics.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-          </video></div>
-          <img src='images/robotics.jpg' width=100%>
-        </div>
-        <script type="text/javascript">
-          function robotics_start() {
-            document.getElementById('robotics_image').style.opacity = "1";
-          }
-
-          function robotics_stop() {
-            document.getElementById('robotics_image').style.opacity = "0";
-          }
-          robotics_stop()
-        </script>
-      </td>
-      <td style="padding:8px;width:80%;vertical-align:middle">
-          <span class="papertitle">Leg-Arm Coordination in Quadrupedal Robotics</span>
-       <p>
-                      Utilizing robot kinematics to perform gait planning for a quadruped robot and trajectory planning for a robotic arm, enabling the combined system to accomplish specific task
-                  </p>    
-                    <a href="data/robotics-report.pdf">report</a> &nbsp;/&nbsp;
-	       <a href="data/robotics-video.mp4">demo</a>
-        <p></p>   
-              </td>
-	    </tr>
-</tbody></table>
-<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-              <tr>
-  <td style="padding:16px;width:100%;vertical-align:middle">
-    <h2>Experiences</h2>
-	   <table style="width:100%;border-collapse:collapse;margin-top:16px">
-	  <tr>
-              <td style="padding:16px;width:20%;vertical-align:middle" >
-                  <img src="images/galaxea.jpg" alt="galaxea" width="160" style="height: auto;" >
-              </td>
-              <td style="padding:8px;width:80%;vertical-align:middle">
-                  <span class="papertitle"> <span style="color:#f59ab2"><a href="https://galaxea-dynamics.com/">Galaxea Dynamics</a></span></li></span>
-		      <p>
-			      R&D intern · Mar.2025 to Aug.2025
-				  </p>
-				  Responsible for research and develop dexterous hand and its teleoperation system, work with Prof. Huazhe Xu.
-		      </p>
-              </td>
-            </tr>
-	 </tbody></table>
-<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-              <tr>
-  <td style="padding:16px;width:100%;vertical-align:middle">
-    <h2>Misc</h2>
-    <p>
-      I'm interested in sports (soccer, basketball, skiing…), playing drums and traveling.
-    </p>
-    
-    <!-- Image and description placed below hobbies -->
-    <table style="width:100%;border-collapse:collapse;margin-top:16px">
-      <tr>
-        <td style="padding:16px;width:20%;vertical-align:middle">
-          <img src="images/drum.jpg" alt="drum" width="160" style="height:auto;">
-        </td>
-        <td style="padding:8px;width:80%;vertical-align:middle">
-          <span class="papertitle">I am the drummer in the Band "楽弃疾"</span>
-          <p>
-            This is a student band formed by a group of young people with passion and dreams. We have performed countless times on stage, playing pop music and rock music.
-          </p>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            </tbody></table>
-          <table width="100%" align="center" border="0" cellpadding="20"><tbody>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-            <td style="padding:0px">
+          <div class="section">
+            <p>
+              I'm an undergraduate student at the University of Washington, currently a research assistant in
+              <a href="https://personalrobotics.cs.washington.edu/">Personal Robotics Lab</a>,
+              advised by Prof. <a href="https://goodrobot.ai/">Siddhartha Srinivasa</a>.
+              Also, I'm honored to work with Prof. <a href="https://yyueluo.com/">Yiyue Luo</a>
+              and PhD student <a href="https://yunchuzhang.github.io/">Yunchu Zhang</a>.
+              My research interests lie in robot design and robot learning.
+            </p>
+            <p>
+              Previously, I was fortunate to work as a research assistant at the
+              <a href="https://air.tsinghua.edu.cn/">Institute for AI Industry Research</a>,
+              Tsinghua University, advised by Prof.
+              <a href="https://air.tsinghua.edu.cn/en/info/1046/1196.htm">Guyue Zhou</a>.
               <br>
-              <p style="text-align:right;font-size:small;">
-                Designed and sourced code based on <a href="https://github.com/jonbarron/jonbarron_website">Jon Barron's website</a>.
-              </p>
-            </td>
-          </tr>
-        </tbody></table>
+              Also, I was honored to intern as R&amp;D engineer at
+              <a href="https://galaxea-dynamics.com/">Galaxea Dynamics</a>.
+            </p>
+          </div>
 
+          <div class="section">
+            <h2 style="margin-bottom:0;">News</h2>
+
+            <div class="news-slider">
+              <div class="news-container">
+                <ul id="news-list">
+                  <li><strong>[Sep. 2025]</strong> 🎉🎉 I became a research assistant in Personal Robotics Lab.</li>
+                  <li><strong>[May. 2025]</strong> 🎉🎉 I became a R&amp;D intern at Galaxea Dynamics.</li>
+                  <li><strong>[Jan. 2025]</strong> 🎉🎉 I joined the Institute for AI Industry Research, Tsinghua University for manipulation research.</li>
+                </ul>
+              </div>
+
+              <div class="slider-container">
+                <div class="slider-track">
+                  <div class="slider-thumb" id="slider-thumb"></div>
+                </div>
+              </div>
+            </div>
+
+            <style>
+              .news-slider {
+                position: relative;
+                max-width: 100%;
+                margin: 0 auto;
+                display: flex;
+                gap: 15px;
+              }
+
+              .news-container {
+                flex-grow: 1;
+                overflow: hidden;
+                max-height: 150px;
+                position: relative;
+              }
+
+              #news-list {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                transition: transform 0.2s ease;
+              }
+
+              #news-list li {
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: rgba(240, 240, 240, 0.1);
+                border-radius: 4px;
+              }
+
+              .slider-container {
+                width: 20px;
+                min-height: 150px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+
+              .slider-track {
+                height: 100%;
+                width: 6px;
+                background-color: #e0e0e0;
+                border-radius: 3px;
+                position: relative;
+              }
+
+              .slider-thumb {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 10px;
+                height: 30px;
+                background-color: #9e9e9e;
+                border-radius: 3px;
+                cursor: pointer;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                transition: top 0.1s ease, opacity 0.3s ease;
+                opacity: 1;
+              }
+
+              .slider-thumb:hover {
+                background-color: #7e7e7e;
+              }
+            </style>
+
+            <script>
+              window.addEventListener('load', function () {
+                const newsList = document.getElementById('news-list');
+                const newsContainer = document.querySelector('.news-container');
+                const sliderThumb = document.getElementById('slider-thumb');
+                const sliderTrack = document.querySelector('.slider-track');
+
+                const listHeight = newsList.scrollHeight;
+                const containerHeight = newsContainer.clientHeight;
+                const scrollableDistance = Math.max(0, listHeight - containerHeight);
+
+                let currentPosition = 0;
+
+                sliderThumb.style.opacity = 1;
+
+                function updatePosition(position) {
+                  position = Math.max(0, Math.min(position, scrollableDistance));
+                  currentPosition = position;
+                  newsList.style.transform = `translateY(-${position}px)`;
+
+                  const thumbPosition = (position / scrollableDistance) * (sliderTrack.clientHeight - sliderThumb.clientHeight);
+                  sliderThumb.style.top = `${thumbPosition}px`;
+                }
+
+                function allowScrolling() {
+                  if (scrollableDistance === 0) {
+                    newsContainer.style.overflowY = 'scroll';
+                    updatePosition(0);
+                  } else {
+                    newsContainer.style.overflowY = 'hidden';
+                  }
+                }
+
+                allowScrolling();
+
+                let isDragging = false;
+                sliderThumb.addEventListener('mousedown', function (e) {
+                  isDragging = true;
+                  e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', function (e) {
+                  if (!isDragging) return;
+                  const trackRect = sliderTrack.getBoundingClientRect();
+                  const thumbHeight = sliderThumb.clientHeight;
+                  const relativeY = Math.min(Math.max(e.clientY - trackRect.top, thumbHeight / 2), trackRect.height - thumbHeight / 2);
+                  const scrollRatio = (relativeY - thumbHeight / 2) / (trackRect.height - thumbHeight);
+                  updatePosition(scrollRatio * scrollableDistance);
+                });
+
+                document.addEventListener('mouseup', function () {
+                  isDragging = false;
+                });
+
+                sliderTrack.addEventListener('click', function (e) {
+                  if (e.target === sliderThumb) return;
+                  const trackRect = sliderTrack.getBoundingClientRect();
+                  const thumbHeight = sliderThumb.clientHeight;
+                  const relativeY = Math.min(Math.max(e.clientY - trackRect.top, thumbHeight / 2), trackRect.height - thumbHeight / 2);
+                  const scrollRatio = (relativeY - thumbHeight / 2) / (trackRect.height - thumbHeight);
+                  updatePosition(scrollRatio * scrollableDistance);
+                });
+
+                newsContainer.addEventListener('wheel', function (e) {
+                  e.preventDefault();
+                  const delta = e.deltaY > 0 ? 30 : -30;
+                  updatePosition(currentPosition + delta);
+                });
+
+                sliderThumb.addEventListener('touchstart', e => {
+                  isDragging = true;
+                  e.preventDefault();
+                });
+
+                document.addEventListener('touchmove', e => {
+                  if (!isDragging) return;
+                  const trackRect = sliderTrack.getBoundingClientRect();
+                  const thumbHeight = sliderThumb.clientHeight;
+                  const relativeY = Math.min(Math.max(e.touches[0].clientY - trackRect.top, thumbHeight / 2), trackRect.height - thumbHeight / 2);
+                  const scrollRatio = (relativeY - thumbHeight / 2) / (trackRect.height - thumbHeight);
+                  updatePosition(scrollRatio * scrollableDistance);
+                });
+
+                document.addEventListener('touchend', function () {
+                  isDragging = false;
+                });
+
+                updatePosition(0);
+              });
+            </script>
+          </div>
+
+          <div class="section">
+            <h2>Research</h2>
+            <p>
+              I am passionate about robot design and robot learning, My goal is to build reliable system to enhance robotic performance. My dream is to become a full-stack roboticist.
+            </p>
+            <p>Herein I present some of my past projects.</p>
+
+            <!-- UTIL -->
+            <div class="row-card">
+              <div class="thumb"><img src="images/UTIL.jpg" alt="UTIL"></div>
+              <div class="body">
+                <span class="papertitle">UTIL: Universal Tool-Centric Interface for Long-Horizon and Multi-Tool Manipulation</span>
+                <p>Ruihan Gao*, Yuchen Yang*, Juanhan Jiao, Yuxuan Miao, Yunchu Zhang, Yiyue Luo, Siddhartha Srinivasa</p>
+                <p>In Submission</p>
+              </div>
+            </div>
+
+            <!-- Gripper Triple -->
+            <div class="row-card">
+              <div class="thumb"><img src="images/Gripper3.jpg" alt="Gripper3"></div>
+              <div class="body">
+                <span class="papertitle">Three-Fingered Dexterous Hand Universal Manipulation Interface</span>
+                <p>Zeyu Pang*, Ruihan Gao*, Yujie Cui*, Yang Luo, Yiheyan Zhang, Yan Ke, Guyue Zhou</p>
+                <p>Under Review</p>
+                <a href="data/Gripper3.pdf">portfolio</a> &nbsp;/&nbsp;
+                <a href="data/Gripper3.mp4">demo</a>
+              </div>
+            </div>
+
+            <!-- Robocon -->
+            <div class="row-card">
+              <div class="thumb"><img src="images/robocon.jpg" alt="robocon"></div>
+              <div class="body">
+                <span class="papertitle">CURC ROBOCON 2024 "Harvest Day"</span>
+                <p>
+                  Our team has developed a robot capable of picking up seedlings and shooting balls. It achieves precise grasping through a parallel four-finger gripper and enables accurate control of the ball's landing point via the simultaneous action of bidirectional friction wheels.
+                </p>
+              </div>
+            </div>
+
+            <!-- Quadrupedal Transformable Tracked Robot -->
+            <div class="row-card" onmouseout="wildlma_stop()" onmouseover="wildlma_start()">
+              <div class="thumb">
+                <div class="hoverwrap" style="position:relative;">
+                  <img src="images/wildlma.jpg" alt="wildlma">
+                  <video id="wildlma" muted autoplay loop>Your browser does not support the video tag.</video>
+                </div>
+                <script type="text/javascript">
+                  function wildlma_start() { document.getElementById('wildlma').style.opacity = "1"; }
+                  function wildlma_stop() { document.getElementById('wildlma').style.opacity = "0"; }
+                  wildlma_stop();
+                </script>
+              </div>
+              <div class="body">
+                <span class="papertitle">Quadrupedal Transformable Tracked Robot</span>
+                <p>
+                  The robot adopts a modular design, allowing for adjustments in leg length and track length to suit different usage scenarios. It achieves a combined wheel-leg mechanism through a metamorphic mechanism, featuring variable track angles and an 8-degree-of-freedom joint design.
+                </p>
+                <a href="data/wildlma.pdf">report</a> &nbsp;/&nbsp;
+                <a href="data/wildlma.mp4">demo</a>
+              </div>
+            </div>
+
+            <!-- ASME SMRDC 2024 -->
+            <div class="row-card" onmouseout="ASME24_stop()" onmouseover="ASME24_start()">
+              <div class="thumb">
+                <div class="hoverwrap" style="position:relative;">
+                  <img src="images/ASME24.jpg" alt="ASME24">
+                  <video id="ASME24" muted autoplay loop>Your browser does not support the video tag.</video>
+                </div>
+                <script type="text/javascript">
+                  function ASME24_start() { document.getElementById('ASME24').style.opacity = "1"; }
+                  function ASME24_stop() { document.getElementById('ASME24').style.opacity = "0"; }
+                  ASME24_stop();
+                </script>
+              </div>
+              <div class="body">
+                <span class="papertitle">ASME Student Mechanism and Robot Design Competition 2024</span>
+                <p>
+                  This project proposed a design transitioning from O-shaped wheels to an ∞-shaped caterpillar track, allowing the robot to carry payloads smoothly on flat surfaces and traverse obstacles on rough terrain.
+                </p>
+                <a href="data/ASME-report.pdf">report</a> &nbsp;/&nbsp;
+                <a href="data/ASME-video.mp4">demo</a>
+              </div>
+            </div>
+
+            <!-- Leg-Arm Coordination -->
+            <div class="row-card" onmouseout="robotics_stop()" onmouseover="robotics_start()">
+              <div class="thumb">
+                <div class="hoverwrap" id="robotics_image" style="position:relative;">
+                  <img src="images/robotics.jpg" alt="robotics">
+                  <video muted autoplay loop>
+                    <source src="images/robotics.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <script type="text/javascript">
+                  function robotics_start() { document.getElementById('robotics_image').style.opacity = "1"; }
+                  function robotics_stop() { document.getElementById('robotics_image').style.opacity = "0"; }
+                  robotics_stop();
+                </script>
+              </div>
+              <div class="body">
+                <span class="papertitle">Leg-Arm Coordination in Quadrupedal Robotics</span>
+                <p>
+                  Utilizing robot kinematics to perform gait planning for a quadruped robot and trajectory planning for a robotic arm, enabling the combined system to accomplish specific task.
+                </p>
+                <a href="data/robotics-report.pdf">report</a> &nbsp;/&nbsp;
+                <a href="data/robotics-video.mp4">demo</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h2>Experiences</h2>
+            <div class="row-card">
+              <div class="thumb"><img src="images/galaxea.jpg" alt="galaxea"></div>
+              <div class="body">
+                <span class="papertitle"><a href="https://galaxea-dynamics.com/">Galaxea Dynamics</a></span>
+                <p>R&amp;D intern &middot; Mar. 2025 to Aug. 2025</p>
+                <p>Responsible for research and development of dexterous hand and its teleoperation system, work with Prof. Huazhe Xu.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h2>Misc</h2>
+            <p>I'm interested in sports (soccer, basketball, skiing&hellip;), playing drums and traveling.</p>
+
+            <div class="row-card">
+              <div class="thumb"><img src="images/drum.jpg" alt="drum"></div>
+              <div class="body">
+                <span class="papertitle">I am the drummer in the Band "楽弃疾"</span>
+                <p>
+                  This is a student band formed by a group of young people with passion and dreams. We have performed countless times on stage, playing pop music and rock music.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p style="text-align:right;font-size:small;">
+            Designed and sourced code based on <a href="https://github.com/jonbarron/jonbarron_website">Jon Barron's website</a>.
+          </p>
+
+        </main>
+      </div>
+    </div>
   </body>
-   
 </html>
