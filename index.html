@@ -113,15 +113,16 @@
     .site-shell {
       max-width: 1140px;
       margin: 0 auto;
-      padding: 32px 20px 60px;
+      padding: 32px 12px 60px;
     }
 
-    /* Top site header, name at the very top of the page like the reference site */
+    /* Top site header, name at the very top of the page like the reference site.
+       This is intentionally NOT constrained to the same max-width/padding as the
+       content column below — Ranjay's nav bar spans edge-to-edge with its own
+       small fixed padding, so the name sits closer to the browser edge. */
     .site-header {
-      padding: 22px 20px;
+      padding: 22px 24px;
       text-align: left;
-      max-width: 1140px;
-      margin: 0 auto;
     }
 
     .site-header .site-title {
@@ -136,13 +137,13 @@
     .layout {
       display: flex;
       align-items: flex-start;
-      gap: 40px;
+      gap: 50px;
     }
 
-    /* Narrow left column (~30% width, matching the reference site's ratio) */
+    /* Narrow left column (exact ratio from the reference site: 29.91% / 70.09%) */
     .sidebar {
-      flex: 0 0 28%;
-      max-width: 320px;
+      flex: 0 0 29.91452991453%;
+      max-width: 29.91452991453%;
       position: sticky;
       top: 24px;
       text-align: center;
