@@ -55,24 +55,25 @@
     }
 
     .site-shell a {
-  color: #F7F9FC;
+  .silver-text {
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #F5F7F9 18%,
+    #BFC5CC 42%,
+    #FFFFFF 55%,
+    #D9DEE3 72%,
+    #9EA5AD 100%
+  );
 
-background: linear-gradient(
-  110deg,
-  #8F969E 0%,
-  #D8DCE1 18%,
-  #FFFFFF 32%,
-  #AEB5BD 45%,
-  #F8FAFC 58%,
-  #C4CAD1 72%,
-  #FFFFFF 84%,
-  #969DA5 100%
-);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 
-box-shadow:
-  0 2px 6px rgba(0, 0, 0, 0.18),
-  0 0 18px rgba(255, 255, 255, 0.25),
-  inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.18);
+}
   font-size: inherit;  
   font-weight: 500;   
   text-decoration: none;
