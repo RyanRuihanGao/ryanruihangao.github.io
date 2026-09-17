@@ -655,6 +655,31 @@
                 <a href="data/ASME-video.mp4">demo</a>
               </div>
             </div> >
+     <!-- Leg-Arm Coordination -->
+            <div class="row-card" onmouseout="robotics_stop()" onmouseover="robotics_start()">
+              <div class="thumb">
+                <div class="hoverwrap" id="robotics_image" style="position:relative;">
+                  <img src="images/robotics.jpg" alt="robotics">
+                  <video muted autoplay loop>
+                    <source src="images/robotics.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <script type="text/javascript">
+                  function robotics_start() { document.getElementById('robotics_image').style.opacity = "1"; }
+                  function robotics_stop() { document.getElementById('robotics_image').style.opacity = "0"; }
+                  robotics_stop();
+                </script>
+              </div>
+              <div class="body">
+                <span class="papertitle">Leg-Arm Coordination in Quadrupedal Robotics</span>
+                <p>
+                  Utilizing robot kinematics to perform gait planning for a quadruped robot and trajectory planning for a robotic arm, enabling the combined system to accomplish specific task.
+                </p>
+                <a href="data/robotics-report.pdf">report</a> &nbsp;/&nbsp;
+                <a href="data/robotics-video.mp4">demo</a>
+              </div>
+            </div> 
           </div>
 
           <div class="section">
