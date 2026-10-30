@@ -143,6 +143,61 @@
   font-size: inherit;
   font-weight: 500;
 }
+.row-card.paper .thumb {
+  flex: 0 0 200px;
+  width: 200px;
+}
+.row-card.paper .thumb img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.paper-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #2a2a2a;
+  margin-bottom: 4px;
+}
+.paper-authors {
+  font-size: 15px;
+  line-height: 22px;
+  color: #8a8a8a;
+  margin-bottom: 6px;
+}
+.row-card .paper-authors strong {
+  font-family: "Lato", sans-serif;
+  font-size: inherit;
+  font-weight: 700;
+  color: #2a2a2a;
+}
+.paper-venue {
+  font-size: 15px;
+  font-style: italic;
+  color: #4caac9;
+  margin-bottom: 8px;
+}
+.site-shell .paper-links a {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 2px 12px;
+  margin-right: 6px;
+  border: 1px solid #4caac9;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.site-shell .paper-links a:hover {
+  background: #4caac9;
+  color: #fff;
+  text-decoration: none;
+}
+@media (max-width: 780px) {
+  .row-card.paper .thumb {
+    width: 100%;
+    flex-basis: auto;
+  }
+}
     .sidebar .sb-name {
       font-family: "Lato", sans-serif;
       font-weight: 300;
@@ -580,16 +635,15 @@
             
           
             <!-- SwapBot -->
-            <div class="row-card">
-              <div class="thumb"><img src="images/swapbot.jpg" alt="swapbot"></div>
-             <div class="body">
-            <span class="papertitle">SwapBot:Tool-Centric Robot Manipulation via Interchangeable End-Effectors and Tactile Sensing</span><br>
-               Yunchu Zhang, Ray Song, Junhan Jiao, Liyiming Ke, Yuchen Yang, <strong>Ryan Ruihan Gao</strong>, Emma Romig, Siddhartha Srinivasa, Yiyue Luo<br>
-           Under Review<br>
-           <a href="https://personalrobotics.cs.washington.edu/SwapBot/">Website</a>
-           </div>
-              </div>
-            </div> 
+            <div class="row-card paper">
+  <div class="thumb"><img src="images/swapbot.jpg" alt="swapbot"></div>
+  <div class="body">
+    <div class="paper-title">SwapBot: Tool-Centric Robot Manipulation via Interchangeable End-Effectors and Tactile Sensing</div>
+    <div class="paper-authors">Yunchu Zhang, Ray Song, Junhan Jiao, Liyiming Ke, Yuchen Yang, <strong>Ryan Ruihan Gao</strong>, Emma Romig, Siddhartha Srinivasa, Yiyue Luo</div>
+    <div class="paper-venue">Under Review</div>
+    <div class="paper-links"><a href="https://personalrobotics.cs.washington.edu/SwapBot/">Website</a></div>
+  </div>
+</div>
 
             <!-- Gripper Triple -->
             <div class="row-card">
